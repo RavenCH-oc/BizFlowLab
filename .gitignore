@@ -1,0 +1,21 @@
+# Local IDE/build outputs
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+# Local configuration, secrets, and databases
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+*.mdf
+*.ldf
+# Local release/build evidence
+backups/
+releases/
+*.log

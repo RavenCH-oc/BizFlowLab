@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="BizFlowLab 訂單查詢 Web 入門練習" />
+  <title>BizFlowLab｜訂單查詢練習</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container header-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">B</span><span>BizFlowLab <small>Web Study</small></span></div>
+      <span class="top-label">C# Minimal API × SQL Server</span>
+    </div>
+  </header>
+  <main class="container">
+    <section class="intro">
+      <p class="eyebrow">LESSON 01 · READ-ONLY WEB APP</p>
+      <h1>從網頁查詢訂單</h1>
+      <p>這是本機學習用介面。瀏覽器以 <code>fetch()</code> 呼叫既有 C# HTTP API，API 再向 SQL Server 查詢資料。</p>
+      <div class="tags" aria-label="技術組成"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>C# / .NET 8</span><span>SQL Server</span></div>
+    </section>
+
+    <section class="card" aria-labelledby="list-heading">
+      <div class="card-header">
+        <div><p class="eyebrow">GET /api/orders</p><h2 id="list-heading">訂單列表</h2></div>
+        <div class="filters">
+          <label for="status-filter">訂單狀態</label>
+          <select id="status-filter">
+            <option value="">全部</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button type="button" id="load-orders" class="button">重新查詢</button>
+        </div>
+      </div>
+      <div id="list-status" class="notice" role="status" aria-live="polite">正在準備查詢…</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">訂單 ID</th><th scope="col">訂單編號</th><th scope="col">客戶</th><th scope="col">狀態</th><th scope="col" class="numeric">總金額</th><th scope="col">操作</th></tr></thead>
+          <tbody id="orders-body"><tr><td colspan="6" class="empty">尚無資料</td></tr></tbody>
+        </table>
+      </div>
+      <p class="footnote">點選「查看」會另發送 <code>GET /api/orders/{id}</code>，本頁不修改任何資料。</p>
+    </section>
+
+    <section class="card detail-card" aria-labelledby="detail-heading">
+      <div class="card-header"><div><p class="eyebrow">GET /api/orders/{id}</p><h2 id="detail-heading">單筆訂單摘要</h2></div></div>
+      <p id="detail-placeholder" class="muted">從上方列表選擇一筆訂單，即可練習呼叫單筆查詢 API。</p>
+      <dl id="detail-fields" class="details" hidden></dl>
+      <p class="footnote">現有 GET API 回傳的是訂單摘要，沒有商品明細；請勿將這裡誤認為完整訂單明細。</p>
+    </section>
+
+    <section class="learning" aria-labelledby="learning-heading">
+      <h2 id="learning-heading">從畫面理解資料流</h2>
+      <div class="pipeline"><span>Browser</span><b aria-hidden="true">→</b><span>fetch / JSON</span><b aria-hidden="true">→</b><span>C# API</span><b aria-hidden="true">→</b><span>SQL Server</span></div>
+      <p>在瀏覽器按 <kbd>F12</kbd> → <strong>Network</strong>，重新查詢訂單，即可觀察 Request、Response、HTTP 狀態碼與 JSON。</p>
+    </section>
+  </main>
+  <footer class="container footer">BizFlowLab · 個人教學練習 · 限本機開發環境使用</footer>
+</body>
+</html>
