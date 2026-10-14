@@ -80,7 +80,13 @@ dotnet run --no-launch-profile -- --urls http://127.0.0.1:5180
 - 已使用不存在的第二筆商品模擬寫入中途失敗，觀察到 HTTP 400、Rollback 日誌，並用 SQL 查詢確認該測試單號未留下訂單。
 - 已在 SSMS 使用 JOIN 查詢商品明細，以及使用 `SUM` / `GROUP BY` 計算訂單總額。
 
-測試時的 Console 與 SQL Server 不屬於此公開 Repository 的自動化驗證環境。本版本尚未在此輸出環境重新執行 .NET 編譯或 SQL Server 整合測試。
+### 本機驗證紀錄（2026-10-13）
+
+已在 Windows 本機對公開候選版本執行 `dotnet build`，結果為 0 個錯誤、0 個警告。使用 Development 環境及 .NET User Secrets 設定 SQL Server 連線後，Web APP 可正常啟動，並成功顯示、重新查詢及依狀態篩選訂單。
+
+在先前的 API／SQL 學習測試中，也曾驗證正常訂單寫入、無效數量回傳 HTTP 400、查詢不存在訂單回傳 404，以及第二筆商品不存在時的 Transaction Rollback，並透過執行日誌與 SQL Server 查詢確認資料庫結果。
+
+上述為個人本機手動驗證，並非由公開 Repository 的 CI 自動執行。目前尚未在全新空白資料庫完整重建並驗證 `create.sql`、`seed_demo.sql` 的執行流程，也未對外正式部署。
 
 ## 設計取捨與後續學習
 
